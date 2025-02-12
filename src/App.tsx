@@ -1,20 +1,17 @@
-import { useState } from 'react';
+import { CssBaseline, Container } from '@mui/material';
+import { ThemeProvider } from '@contexts/ThemeContext';
+import { Header } from '@components/Header';
+import { CoinTable } from '@components/CoinTable';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </div>
+    <ThemeProvider>
+      <CssBaseline />
+      <Header />
+      <Container sx={{ mt: 4 }}>
+        <CoinTable />
+      </Container>
+    </ThemeProvider>
   );
 }
-
 export default App;

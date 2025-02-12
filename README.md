@@ -1,50 +1,162 @@
-# React + TypeScript + Vite
+# Crypto Market Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une application React moderne pour suivre les prix des cryptomonnaies en temps réel, construite avec les meilleures pratiques et technologies actuelles.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19.0.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue)
+![Vite](https://img.shields.io/badge/Vite-6.1.0-brightgreen)
+![MUI](https://img.shields.io/badge/MUI-6.4.4-purple)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Fonctionnalités
 
-## Expanding the ESLint configuration
+- ✨ Interface utilisateur moderne avec Material-UI
+- 🌓 Mode sombre/clair
+- 📊 Tableau de bord des cryptomonnaies en temps réel
+- 🔄 Actualisation automatique des données toutes les 30 secondes
+- 📱 Design responsive
+- 🎯 Gestion d'état optimisée avec React Query et Zustand
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Technologies Utilisées
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend Framework**: React 19
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **UI Framework**: Material-UI (MUI)
+- **State Management**:
+  - TanStack Query (React Query) pour la gestion des données serveur
+  - Zustand pour la gestion de l'état global
+- **API**: CoinGecko
+- **Styling**: Emotion (CSS-in-JS)
+- **Form Validation**: Zod
+- **Code Quality**:
+  - ESLint
+  - Prettier
+  - TypeScript strict mode
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
+## 🌟 Pourquoi TanStack ?
+
+TanStack fournit une suite d'outils modernes et performants pour React, particulièrement utiles dans ce projet :
+
+### TanStack Query (React Query)
+
+- 🔄 **Gestion du Cache Intelligente** : Mise en cache automatique des données avec invalidation intelligente
+- 🎯 **Synchronisation en Temps Réel** : Actualisation automatique des données avec `refetchInterval`
+- 🔍 **État de Chargement** : Gestion simplifiée des états loading/error/success
+- 📊 **Dé-duplication des Requêtes** : Évite les requêtes en double pour optimiser les performances
+
+```typescript
+// Exemple d'utilisation dans notre hook useCoins
+export const useCoins = () => {
+  return useQuery<Coin[]>({
+    queryKey: ['coins'],
+    queryFn: getCoins,
+    refetchInterval: 30000, // Rafraîchissement automatique
+    staleTime: 10000, // Gestion du cache
+  });
+};
+```
+
+### TanStack Table
+
+- 📋 **Tri et Filtrage** : Fonctionnalités avancées de tri et filtrage intégrées
+- 🎨 **Personnalisation** : API flexible pour un style personnalisé avec Material-UI
+- 📱 **Responsive** : Gestion optimale des tableaux sur tous les appareils
+- 🔧 **Type-safe** : Totalement typé avec TypeScript pour une meilleure maintenabilité
+
+```typescript
+// Exemple de configuration de colonne avec TanStack Table
+columnHelper.accessor('price_change_percentage_24h', {
+  header: '24h %',
+  cell: (info) => {
+    const value = info.getValue();
+    const color = value >= 0 ? 'success.main' : 'error.main';
+    return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
   },
 })
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### TanStack Form (Bonus)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- 🎯 **Validation Type-safe** : Intégration parfaite avec Zod
+- 🔄 **Performance** : Rendu optimisé et mise à jour efficace des champs
+- 🎨 **Flexible** : S'adapte à tous les composants UI
+- 📝 **Gestion d'État** : État du formulaire centralisé et performant
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+Ces outils TanStack offrent :
+
+- 📈 Une meilleure performance globale de l'application
+- 🛠️ Une maintenance facilitée grâce au typage fort
+- 💻 Une expérience développeur (DX) améliorée
+- 🔧 Une architecture scalable et robuste
+
+## 📦 Installation
+
+1. Clonez le repository
+
+```bash
+git clone [votre-repo-url]
+cd react-guideline
 ```
+
+2. Installez les dépendances
+
+```bash
+npm install
+```
+
+3. Configurez les variables d'environnement
+
+```bash
+cp .env.example .env
+```
+
+Remplissez les variables nécessaires dans le fichier `.env`:
+
+```
+VITE_COIN_GECKO_BASE_URL='https://api.coingecko.com/api/v3'
+```
+
+4. Lancez l'application en mode développement
+
+```bash
+npm run dev
+```
+
+## 📝 Scripts Disponibles
+
+- `npm run dev` - Lance l'application en mode développement
+- `npm run build` - Compile l'application pour la production
+- `npm run lint` - Vérifie le code avec ESLint
+- `npm run preview` - Prévisualise la version de production localement
+
+## 🏗️ Structure du Projet
+
+```
+src/
+├── components/      # Composants React réutilisables
+├── contexts/        # Contextes React (ex: ThemeContext)
+├── data/
+│   ├── hooks/      # Custom hooks
+│   ├── interfaces/ # TypeScript interfaces
+│   ├── schemas/    # Schémas de validation Zod
+│   └── services/   # Services API
+├── stores/         # Stores Zustand
+└── App.tsx         # Composant racine
+```
+
+## 🔧 Configuration
+
+Le projet utilise plusieurs fichiers de configuration :
+
+- `vite.config.ts` - Configuration de Vite
+- `tsconfig.json` - Configuration TypeScript
+- `.eslintrc.js` - Configuration ESLint
+- `.prettierrc.js` - Configuration Prettier
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou soumettre une pull request.
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.

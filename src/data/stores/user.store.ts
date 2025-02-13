@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { User } from '@interfaces/user.interface';
+import { User } from '@/data/interfaces/user.interface';
 
 export interface UserState {
   isAuthenticated: boolean;

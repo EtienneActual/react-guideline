@@ -11,14 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root';
-import { Route as RestApiImport } from './routes/rest-api';
+import { Route as CoinsImport } from '././routes/coins';
 import { Route as IndexImport } from './routes/index';
 
 // Create/Update Routes
 
-const RestApiRoute = RestApiImport.update({
-  id: '/rest-api',
-  path: '/rest-api',
+const CoinsRoute = CoinsImport.update({
+  id: '/coins',
+  path: '/coins',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -39,11 +39,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport;
       parentRoute: typeof rootRoute;
     };
-    '/rest-api': {
-      id: '/rest-api';
-      path: '/rest-api';
-      fullPath: '/rest-api';
-      preLoaderRoute: typeof RestApiImport;
+    '/coins': {
+      id: '/coins';
+      path: '/coins';
+      fullPath: '/coins';
+      preLoaderRoute: typeof CoinsImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -53,37 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
-  '/rest-api': typeof RestApiRoute;
+  '/coins': typeof CoinsRoute;
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
-  '/rest-api': typeof RestApiRoute;
+  '/coins': typeof CoinsRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexRoute;
-  '/rest-api': typeof RestApiRoute;
+  '/coins': typeof CoinsRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/rest-api';
+  fullPaths: '/' | '/coins';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/rest-api';
-  id: '__root__' | '/' | '/rest-api';
+  to: '/' | '/coins';
+  id: '__root__' | '/' | '/coins';
   fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
-  RestApiRoute: typeof RestApiRoute;
+  CoinsRoute: typeof CoinsRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  RestApiRoute: RestApiRoute,
+  CoinsRoute: CoinsRoute,
 };
 
 export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
@@ -95,14 +95,14 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/rest-api"
+        "/coins"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/rest-api": {
-      "filePath": "rest-api.tsx"
+    "/coins": {
+      "filePath": "coins.tsx"
     }
   }
 }

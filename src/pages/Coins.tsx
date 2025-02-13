@@ -1,6 +1,6 @@
-import { CoinTable } from '@components/CoinTable';
+import { CoinTable } from '@/components/CoinTable';
 
-const CryptoPage = () => {
+const CoinsPage = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-center gap-3 py-4">
@@ -15,4 +15,4 @@ const CryptoPage = () => {
   );
 };
 
-export default CryptoPage;
+export default CoinsPage;

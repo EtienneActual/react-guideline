@@ -1,7 +1,7 @@
 import { CssBaseline, Container } from '@mui/material';
-import { ThemeProvider } from '@contexts/ThemeContext';
-import { Header } from '@components/Header';
-import { CoinTable } from '@components/CoinTable';
+import { ThemeProvider } from '@/data/contexts/ThemeContext';
+import { Header } from '@/components/Header';
+import { CoinTable } from '@/components/CoinTable';
 
 function App() {
   return (

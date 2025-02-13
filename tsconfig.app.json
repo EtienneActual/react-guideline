@@ -25,16 +25,7 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@stores/*": ["src/stores/*"],
-      "@data/*": ["src/data/*"],
-      "@schemas/*": ["src/data/schemas/*"],
-      "@interfaces/*": ["src/data/interfaces/*"],
-      "@hooks/*": ["src/data/hooks/*"],
-      "@services/*": ["src/data/services/*"],
-      "@pages/*": ["src/pages/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src"]

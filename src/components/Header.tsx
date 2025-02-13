@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useTheme } from '@contexts/ThemeContext';
+import { useTheme } from '@/data/contexts/ThemeContext';
 import { useState } from 'react';
-import { LoginModal } from '@components/LoginModal';
-import { useUserStore } from '@stores/user.store';
+import { LoginModal } from '@/components/LoginModal';
+import { useUserStore } from '@/data/stores/user.store';
 import { Link } from '@tanstack/react-router';
 
 export const Header = () => {
@@ -20,7 +20,7 @@ export const Header = () => {
           <Button component={Link} to="/" color="inherit" sx={{ textTransform: 'none', mr: 3, fontSize: '1.3rem' }}>
             React Guidelines
           </Button>
-          <Button component={Link} to="/rest-api" color="inherit" sx={{ textTransform: 'none' }}>
+          <Button component={Link} to="/coins" color="inherit" sx={{ textTransform: 'none' }}>
             Rest API
           </Button>
           <Box sx={{ flexGrow: 1 }} />

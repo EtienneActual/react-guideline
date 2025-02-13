@@ -6,8 +6,8 @@ import {
   getSortedRowModel,
   SortingState,
 } from '@tanstack/react-table';
-import { CoinHttp } from '@interfaces/coin.interface';
-import { useCoins } from '@hooks/useCoins';
+import { Coin } from '@/data/interfaces/coin.interface';
+import { useCoins } from '@/data/hooks/use-coins.hook';
 import { useState } from 'react';
 import {
   Table,
@@ -22,10 +22,10 @@ import {
   Typography,
 } from '@mui/material';
 
-const columnHelper = createColumnHelper<CoinHttp>();
+const columnHelper = createColumnHelper<Coin>();
 
 const columns = [
-  columnHelper.accessor('market_cap_rank', {
+  columnHelper.accessor('marketCapRank', {
     header: 'Rank',
     cell: (info) => info.getValue(),
   }),
@@ -41,11 +41,11 @@ const columns = [
       </Box>
     ),
   }),
-  columnHelper.accessor('current_price', {
+  columnHelper.accessor('currentPrice', {
     header: 'Price',
     cell: (info) => `$${info.getValue().toLocaleString()}`,
   }),
-  columnHelper.accessor('price_change_percentage_24h', {
+  columnHelper.accessor('priceChangePercentage24h', {
     header: '24h %',
     cell: (info) => {
       const value = info.getValue();
@@ -54,7 +54,7 @@ const columns = [
       return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
     },
   }),
-  columnHelper.accessor('price_change_percentage_7d', {
+  columnHelper.accessor('priceChangePercentage7d', {
     header: '7d %',
     cell: (info) => {
       const value = info.getValue();
@@ -63,11 +63,11 @@ const columns = [
       return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
     },
   }),
-  columnHelper.accessor('market_cap', {
+  columnHelper.accessor('marketCap', {
     header: 'Market Cap',
     cell: (info) => `$${info.getValue().toLocaleString()}`,
   }),
-  columnHelper.accessor('total_volume', {
+  columnHelper.accessor('totalVolume', {
     header: 'Volume (24h)',
     cell: (info) => `$${info.getValue().toLocaleString()}`,
   }),
@@ -113,6 +113,10 @@ export const CoinTable = () => {
               {headerGroup.headers.map((header) => (
                 <TableCell key={header.id} onClick={header.column.getToggleSortingHandler()} sx={{ cursor: 'pointer' }}>
                   {flexRender(header.column.columnDef.header, header.getContext())}
+                  {{
+                    asc: ' 🔼',
+                    desc: ' 🔽',
+                  }[header.column.getIsSorted() as string] ?? null}
                 </TableCell>
               ))}
             </TableRow>

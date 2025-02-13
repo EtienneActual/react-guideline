@@ -1,7 +1,7 @@
 import { useForm } from '@tanstack/react-form';
 import { Button, TextField, Stack } from '@mui/material';
-import { useUserStore } from '@stores/user.store';
-import { loginSchema } from '@schemas/login.schema';
+import { useUserStore } from '@/data/stores/user.store';
+import { loginSchema } from '@/data/schemas/login.schema';
 
 interface Props {
   onSuccess: () => void;
@@ -25,7 +25,9 @@ export const LoginForm = ({ onSuccess }: Props) => {
     },
     // On valide le formulaire avant de soumettre les données grace au onSubmit
     validators: {
+      onChange: loginSchema,
       onSubmit: loginSchema,
+      onMount: loginSchema,
     },
   });
 

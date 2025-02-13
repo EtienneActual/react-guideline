@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCoins } from '@services/coin.service';
-import { CoinHttp } from '@interfaces/coin.interface';
+import { getCoins } from '@/data/services/coin.service';
+import { Coin } from '@/data/interfaces/coin.interface';
+
 export const useCoins = () => {
-  return useQuery<CoinHttp[]>({
+  return useQuery<Coin[]>({
     queryKey: ['coins'],
     queryFn: getCoins,
     refetchInterval: 30000, // Rafraîchir toutes les 30 secondes

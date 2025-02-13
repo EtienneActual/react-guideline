@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as StarWarsImport } from './routes/star-wars'
 import { Route as SocketImport } from './routes/socket'
 import { Route as CoinsImport } from './routes/coins'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const StarWarsRoute = StarWarsImport.update({
+  id: '/star-wars',
+  path: '/star-wars',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const SocketRoute = SocketImport.update({
   id: '/socket',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SocketImport
       parentRoute: typeof rootRoute
     }
+    '/star-wars': {
+      id: '/star-wars'
+      path: '/star-wars'
+      fullPath: '/star-wars'
+      preLoaderRoute: typeof StarWarsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
   '/socket': typeof SocketRoute
+  '/star-wars': typeof StarWarsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
   '/socket': typeof SocketRoute
+  '/star-wars': typeof StarWarsRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
   '/socket': typeof SocketRoute
+  '/star-wars': typeof StarWarsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/coins' | '/socket'
+  fullPaths: '/' | '/coins' | '/socket' | '/star-wars'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/coins' | '/socket'
-  id: '__root__' | '/' | '/coins' | '/socket'
+  to: '/' | '/coins' | '/socket' | '/star-wars'
+  id: '__root__' | '/' | '/coins' | '/socket' | '/star-wars'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoinsRoute: typeof CoinsRoute
   SocketRoute: typeof SocketRoute
+  StarWarsRoute: typeof StarWarsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoinsRoute: CoinsRoute,
   SocketRoute: SocketRoute,
+  StarWarsRoute: StarWarsRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/coins",
-        "/socket"
+        "/socket",
+        "/star-wars"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/socket": {
       "filePath": "socket.tsx"
+    },
+    "/star-wars": {
+      "filePath": "star-wars.tsx"
     }
   }
 }

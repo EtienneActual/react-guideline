@@ -1,7 +1,7 @@
 import { Coin } from '@/data/interfaces/coin.interface';
 import { toCoin } from '@/data/dto/coin.dto';
 
-const BASE_URL = 'https://api.coingecko.com/api/v3';
+const BASE_URL = import.meta.env.VITE_COIN_GECKO_BASE_URL;
 
 export const getCoins = async (): Promise<Coin[]> => {
   const response = await fetch(

@@ -26,6 +26,9 @@ export const Header = () => {
           <Button component={Link} to="/socket" color="inherit" sx={{ textTransform: 'none' }}>
             Chat (Socket.IO)
           </Button>
+          <Button component={Link} to="/star-wars" color="inherit" sx={{ textTransform: 'none' }}>
+            Star Wars (GraphQL)
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton onClick={toggleTheme} color="inherit">

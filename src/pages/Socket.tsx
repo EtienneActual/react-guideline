@@ -31,7 +31,6 @@ const SocketPage = () => {
   };
 
   const handleConnect = useCallback(() => {
-    console.log('Connected to Socket.IO server');
     setMessages((prev) => [...prev, 'Connected to chat server']);
   }, []);
 

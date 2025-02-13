@@ -5,6 +5,7 @@ import { useTheme } from '@contexts/ThemeContext';
 import { useState } from 'react';
 import { LoginModal } from '@components/LoginModal';
 import { useUserStore } from '@stores/user.store';
+import { Link } from '@tanstack/react-router';
 
 export const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -16,9 +17,13 @@ export const Header = () => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Button component={Link} to="/" color="inherit" sx={{ textTransform: 'none', mr: 3, fontSize: '1.3rem' }}>
             React Guidelines
-          </Typography>
+          </Button>
+          <Button component={Link} to="/rest-api" color="inherit" sx={{ textTransform: 'none' }}>
+            Rest API
+          </Button>
+          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton onClick={toggleTheme} color="inherit">
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}

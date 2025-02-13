@@ -33,7 +33,8 @@
       "@schemas/*": ["src/data/schemas/*"],
       "@interfaces/*": ["src/data/interfaces/*"],
       "@hooks/*": ["src/data/hooks/*"],
-      "@services/*": ["src/data/services/*"]
+      "@services/*": ["src/data/services/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["src"]

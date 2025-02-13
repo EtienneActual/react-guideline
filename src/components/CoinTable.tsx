@@ -6,7 +6,7 @@ import {
   getSortedRowModel,
   SortingState,
 } from '@tanstack/react-table';
-import { Coin } from '@interfaces/coin.interface';
+import { CoinHttp } from '@interfaces/coin.interface';
 import { useCoins } from '@hooks/useCoins';
 import { useState } from 'react';
 import {
@@ -22,7 +22,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const columnHelper = createColumnHelper<Coin>();
+const columnHelper = createColumnHelper<CoinHttp>();
 
 const columns = [
   columnHelper.accessor('market_cap_rank', {
@@ -49,6 +49,7 @@ const columns = [
     header: '24h %',
     cell: (info) => {
       const value = info.getValue();
+      if (value === null) return '-';
       const color = value >= 0 ? 'success.main' : 'error.main';
       return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
     },
@@ -57,6 +58,7 @@ const columns = [
     header: '7d %',
     cell: (info) => {
       const value = info.getValue();
+      if (value === null) return '-';
       const color = value >= 0 ? 'success.main' : 'error.main';
       return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
     },

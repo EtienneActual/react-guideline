@@ -21,7 +21,10 @@ export const Header = () => {
             React Guidelines
           </Button>
           <Button component={Link} to="/coins" color="inherit" sx={{ textTransform: 'none' }}>
-            Rest API
+            Coins (Rest API)
+          </Button>
+          <Button component={Link} to="/socket" color="inherit" sx={{ textTransform: 'none' }}>
+            Chat (Socket.IO)
           </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

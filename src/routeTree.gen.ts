@@ -10,83 +10,104 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as CoinsImport } from '././routes/coins';
-import { Route as IndexImport } from './routes/index';
+import { Route as rootRoute } from './routes/__root'
+import { Route as SocketImport } from './routes/socket'
+import { Route as CoinsImport } from './routes/coins'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const SocketRoute = SocketImport.update({
+  id: '/socket',
+  path: '/socket',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const CoinsRoute = CoinsImport.update({
   id: '/coins',
   path: '/coins',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/coins': {
-      id: '/coins';
-      path: '/coins';
-      fullPath: '/coins';
-      preLoaderRoute: typeof CoinsImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/coins'
+      path: '/coins'
+      fullPath: '/coins'
+      preLoaderRoute: typeof CoinsImport
+      parentRoute: typeof rootRoute
+    }
+    '/socket': {
+      id: '/socket'
+      path: '/socket'
+      fullPath: '/socket'
+      preLoaderRoute: typeof SocketImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/coins': typeof CoinsRoute;
+  '/': typeof IndexRoute
+  '/coins': typeof CoinsRoute
+  '/socket': typeof SocketRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/coins': typeof CoinsRoute;
+  '/': typeof IndexRoute
+  '/coins': typeof CoinsRoute
+  '/socket': typeof SocketRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
-  '/coins': typeof CoinsRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/coins': typeof CoinsRoute
+  '/socket': typeof SocketRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/coins';
-  fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/coins';
-  id: '__root__' | '/' | '/coins';
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/coins' | '/socket'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/coins' | '/socket'
+  id: '__root__' | '/' | '/coins' | '/socket'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  CoinsRoute: typeof CoinsRoute;
+  IndexRoute: typeof IndexRoute
+  CoinsRoute: typeof CoinsRoute
+  SocketRoute: typeof SocketRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoinsRoute: CoinsRoute,
-};
+  SocketRoute: SocketRoute,
+}
 
-export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -95,7 +116,8 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/coins"
+        "/coins",
+        "/socket"
       ]
     },
     "/": {
@@ -103,6 +125,9 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     },
     "/coins": {
       "filePath": "coins.tsx"
+    },
+    "/socket": {
+      "filePath": "socket.tsx"
     }
   }
 }

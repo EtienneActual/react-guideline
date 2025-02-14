@@ -16,7 +16,7 @@ const columns = [
   }),
   columnHelper.accessor('releaseDate', {
     header: 'Release',
-    cell: (info) => new Date(info.getValue()).toLocaleDateString(),
+    cell: (info) => info.getValue().format('DD/MM/YYYY'),
   }),
   columnHelper.accessor('species', {
     header: 'Species',

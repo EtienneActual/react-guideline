@@ -1,7 +1,9 @@
+import { Dayjs } from 'dayjs';
+
 export interface StarWars {
   title: string;
   director: string;
-  releaseDate: string;
+  releaseDate: Dayjs;
   species: string[];
 }
 

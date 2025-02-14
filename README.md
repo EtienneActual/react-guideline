@@ -23,7 +23,6 @@ Un projet React moderne qui démontre les meilleures pratiques de développement
 ```
 src/
 ├── components/         # Composants réutilisables
-│   ├── DataTable/     # Composant de tableau générique
 │   ├── Form/          # Composants de formulaire
 │   ├── Modal/         # Composants de modal
 │   ├── Shared/        # Composants partagés (Error, Loading...)
@@ -44,64 +43,71 @@ src/
 
 ## 🌟 Fonctionnalités
 
-### Gestion des Données
+### 🔄 Gestion des Données et État
 
-- Requêtes optimisées avec TanStack Query
-- DTOs pour la transformation des données
-- Interfaces TypeScript pour le typage strict
-- Gestion des dates avec DayJS
+- **Gestion d'État**
 
-### Interface Utilisateur
+  - État global avec Zustand
+  - État serveur avec React Query
+  - Gestion du thème avec Context API
 
-- Design System Material-UI
-- Tableaux interactifs avec tri
-- Formulaires avec validation
-- Modales et composants réutilisables
+- **Communication Serveur**
 
-### Architecture
+  - Requêtes REST avec CoinGecko API
+  - Requêtes GraphQL avec Star Wars API
+  - Rafraîchissement automatique des données (CoinGecko)
+  - Chat temps réel avec Socket.IO
 
-- Error Boundaries pour la gestion des erreurs
-- Suspense pour le chargement
-- Architecture modulaire et maintenable
-- Patterns React modernes
+- **Transformation des Données**
+  - Pattern DTO pour la normalisation
+  - Validation des formulaires avec Zod
+  - Typage strict avec TypeScript
+
+### 🎨 Interface Utilisateur
+
+- **Composants**
+
+  - Tables de données (TanStack Table)
+  - Formulaire de login avec validation
+  - Modales réutilisables
+  - Composants de chargement et d'erreur
+
+- **Thème**
+
+  - Support clair/sombre
+  - Composants MUI personnalisés
+
+### 🏗 Architecture et Patterns
+
+- **Gestion des Erreurs**
+
+  - Error Boundaries par feature
+  - AsyncBoundary (Error + Suspense)
+  - Fallbacks de chargement
+
+- **Performance**
+
+  - Suspense pour le chargement
+  - Gestion du cache avec React Query
 
 ## 🛠 Installation
 
-### Installation des dépendances
-
+```bash
+# Installation des dépendances
 npm install
 
-### Lancement en développement
-
+# Lancement en développement
 npm run dev
+```
 
 ## 🔧 Configuration
 
-1. Créez un fichier \`.env\` à la racine du projet :
-   \`\`\`env
-   VITE_COIN_GECKO_BASE_URL=https://api.coingecko.com/api/v3
-   VITE_STAR_WARS_BASE_URL=https://swapi-graphql.netlify.app/graphql
-   \`\`\`
+1. Créez un fichier `.env` à la racine du projet :
 
-## 📚 Patterns et Bonnes Pratiques
-
-### Gestion des Erreurs
-
-- Error Boundaries pour capturer les erreurs React
-- AsyncBoundary pour combiner ErrorBoundary et Suspense
-- Validation des données avec des schémas
-
-### Gestion des États
-
-- Zustand pour l'état global
-- React Query pour l'état serveur
-- Context pour les thèmes et configurations
-
-### Performance
-
-- Suspense pour le chargement
-- Mise en cache des requêtes
-- Optimisations des re-rendus
+```env
+VITE_COIN_GECKO_BASE_URL=https://api.coingecko.com/api/v3
+VITE_STAR_WARS_BASE_URL=https://swapi-graphql.netlify.app/graphql
+```
 
 ## 📝 Conventions de Code
 

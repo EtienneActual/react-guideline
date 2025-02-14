@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, IconButton, Box, Button } from '@mui/material';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useTheme } from '@/data/contexts/ThemeContext';
+import { useTheme } from '@/data/contexts/theme.context';
 import { useState } from 'react';
 import { LoginModal } from '@/components/Modal/LoginModal';
 import { useUserStore } from '@/data/stores/user.store';

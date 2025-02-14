@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
-import { LoginForm } from '@/components/LoginForm';
+import { LoginForm } from '@/components/Form/LoginForm';
 
 interface LoginModalProps {
   open: boolean;

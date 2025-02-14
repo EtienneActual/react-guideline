@@ -1,6 +1,5 @@
-import { CoinTable } from '@/components/CoinTable';
-import { Suspense } from 'react';
-import { LoadingFallback } from '@/components/LoadingFallback';
+import { CoinTable } from '@/components/Tables/CoinTable';
+import { AsyncBoundary } from '@/components/Shared/AsyncBoundary';
 
 const CoinsPage = () => {
   return (
@@ -12,9 +11,9 @@ const CoinsPage = () => {
           className="h-8 w-auto"
         />
       </div>
-      <Suspense fallback={<LoadingFallback />}>
+      <AsyncBoundary>
         <CoinTable />
-      </Suspense>
+      </AsyncBoundary>
     </div>
   );
 };

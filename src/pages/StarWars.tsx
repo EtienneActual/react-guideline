@@ -1,8 +1,7 @@
 import { Box, Typography, Stack } from '@mui/material';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import { Suspense } from 'react';
-import { LoadingFallback } from '@/components/LoadingFallback';
-import { StarWarsTable } from '@/components/StarWarsTable';
+import { StarWarsTable } from '@/components/Tables/StarWarsTable';
+import { AsyncBoundary } from '@/components/Shared/AsyncBoundary';
 
 const StarWars = () => {
   return (
@@ -11,9 +10,9 @@ const StarWars = () => {
         <RocketLaunchIcon sx={{ fontSize: 40, color: 'primary.main' }} />
         <Typography variant="h4">Star Wars Films</Typography>
       </Stack>
-      <Suspense fallback={<LoadingFallback />}>
+      <AsyncBoundary>
         <StarWarsTable />
-      </Suspense>
+      </AsyncBoundary>
     </Box>
   );
 };

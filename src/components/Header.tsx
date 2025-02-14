@@ -3,7 +3,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTheme } from '@/data/contexts/ThemeContext';
 import { useState } from 'react';
-import { LoginModal } from '@/components/LoginModal';
+import { LoginModal } from '@/components/Modal/LoginModal';
 import { useUserStore } from '@/data/stores/user.store';
 import { Link } from '@tanstack/react-router';
 

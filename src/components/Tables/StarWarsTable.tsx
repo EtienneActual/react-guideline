@@ -1,16 +1,33 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useSuspenseQuery } from '@tanstack/react-query';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { columns } from '@/data/config/star-wars-columns.config';
-import { fetchStarWarsFilms } from '@/data/services/star-wars.service';
+import { useStarWars } from '@/data/hooks/use-star-wars.hook';
+import { StarWars } from '@/data/interfaces/star-wars.interface';
+import { createColumnHelper } from '@tanstack/react-table';
+const columnHelper = createColumnHelper<StarWars>();
+
+const columns = [
+  columnHelper.accessor('title', {
+    header: 'Title',
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor('director', {
+    header: 'Director',
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor('releaseDate', {
+    header: 'Release',
+    cell: (info) => new Date(info.getValue()).toLocaleDateString(),
+  }),
+  columnHelper.accessor('species', {
+    header: 'Species',
+    cell: (info) => info.getValue().join(', '),
+  }),
+];
 
 export const StarWarsTable = () => {
-  const { data: response } = useSuspenseQuery({
-    queryKey: ['starWarsFilms'],
-    queryFn: fetchStarWarsFilms,
-  });
+  const { data: response } = useStarWars();
 
-  const films = response?.data?.allFilms?.films || [];
+  const films = response ?? [];
 
   const table = useReactTable({
     data: films,

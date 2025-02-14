@@ -1,11 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
 
-interface ErrorFallbackProps {
+interface Props {
   error: Error;
   resetErrorBoundary: () => void;
 }
 
-export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => (
+export const ErrorFallback = ({ error, resetErrorBoundary }: Props) => (
   <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
     <Typography variant="h5" color="error">
       Something went wrong

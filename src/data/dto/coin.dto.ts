@@ -16,7 +16,6 @@ export const toCoin = (response: CoinHttp): Coin => ({
   athDate: response.ath_date,
   atl: response.atl,
   atlChangePercentage: response.atl_change_percentage,
-  atlDate: response.atl_date,
   circulatingSupply: response.circulating_supply,
   fullyDilutedValuation: response.fully_diluted_valuation,
   high24h: response.high_24h,
@@ -28,6 +27,7 @@ export const toCoin = (response: CoinHttp): Coin => ({
   priceChangePercentage7dInCurrency: response.price_change_percentage_7d_in_currency,
   priceChangePercentage24hInCurrency: response.price_change_percentage_24h_in_currency,
   totalSupply: response.total_supply,
+  atlDate: response.atl_date,
   lastUpdated: response.last_updated,
   roi: response.roi,
 });

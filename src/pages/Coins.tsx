@@ -1,4 +1,6 @@
 import { CoinTable } from '@/components/CoinTable';
+import { Suspense } from 'react';
+import { LoadingFallback } from '@/components/LoadingFallback';
 
 const CoinsPage = () => {
   return (
@@ -10,7 +12,9 @@ const CoinsPage = () => {
           className="h-8 w-auto"
         />
       </div>
-      <CoinTable />
+      <Suspense fallback={<LoadingFallback />}>
+        <CoinTable />
+      </Suspense>
     </div>
   );
 };

@@ -67,20 +67,13 @@ src/
 
 ## 🛠 Installation
 
-\`\`\`bash
-
-# Installation des dépendances
+### Installation des dépendances
 
 npm install
 
-# Lancement en développement
+### Lancement en développement
 
 npm run dev
-
-# Build pour la production
-
-npm run build
-\`\`\`
 
 ## 🔧 Configuration
 

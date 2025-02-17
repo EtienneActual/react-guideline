@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as StarWarsImport } from './routes/star-wars'
 import { Route as SocketImport } from './routes/socket'
+import { Route as FormDemoImport } from './routes/form-demo'
 import { Route as CoinsImport } from './routes/coins'
 import { Route as IndexImport } from './routes/index'
 
@@ -27,6 +28,12 @@ const StarWarsRoute = StarWarsImport.update({
 const SocketRoute = SocketImport.update({
   id: '/socket',
   path: '/socket',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormDemoRoute = FormDemoImport.update({
+  id: '/form-demo',
+  path: '/form-demo',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoinsImport
       parentRoute: typeof rootRoute
     }
+    '/form-demo': {
+      id: '/form-demo'
+      path: '/form-demo'
+      fullPath: '/form-demo'
+      preLoaderRoute: typeof FormDemoImport
+      parentRoute: typeof rootRoute
+    }
     '/socket': {
       id: '/socket'
       path: '/socket'
@@ -82,6 +96,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
+  '/form-demo': typeof FormDemoRoute
   '/socket': typeof SocketRoute
   '/star-wars': typeof StarWarsRoute
 }
@@ -89,6 +104,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
+  '/form-demo': typeof FormDemoRoute
   '/socket': typeof SocketRoute
   '/star-wars': typeof StarWarsRoute
 }
@@ -97,22 +113,24 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/coins': typeof CoinsRoute
+  '/form-demo': typeof FormDemoRoute
   '/socket': typeof SocketRoute
   '/star-wars': typeof StarWarsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/coins' | '/socket' | '/star-wars'
+  fullPaths: '/' | '/coins' | '/form-demo' | '/socket' | '/star-wars'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/coins' | '/socket' | '/star-wars'
-  id: '__root__' | '/' | '/coins' | '/socket' | '/star-wars'
+  to: '/' | '/coins' | '/form-demo' | '/socket' | '/star-wars'
+  id: '__root__' | '/' | '/coins' | '/form-demo' | '/socket' | '/star-wars'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoinsRoute: typeof CoinsRoute
+  FormDemoRoute: typeof FormDemoRoute
   SocketRoute: typeof SocketRoute
   StarWarsRoute: typeof StarWarsRoute
 }
@@ -120,6 +138,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoinsRoute: CoinsRoute,
+  FormDemoRoute: FormDemoRoute,
   SocketRoute: SocketRoute,
   StarWarsRoute: StarWarsRoute,
 }
@@ -136,6 +155,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/coins",
+        "/form-demo",
         "/socket",
         "/star-wars"
       ]
@@ -145,6 +165,9 @@ export const routeTree = rootRoute
     },
     "/coins": {
       "filePath": "coins.tsx"
+    },
+    "/form-demo": {
+      "filePath": "form-demo.tsx"
     },
     "/socket": {
       "filePath": "socket.tsx"

@@ -29,6 +29,9 @@ export const Header = () => {
           <Button component={Link} to="/star-wars" color="inherit" sx={{ textTransform: 'none' }}>
             Star Wars (GraphQL)
           </Button>
+          <Button component={Link} to="/form-demo" color="inherit" sx={{ textTransform: 'none' }}>
+            Form Demo
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton onClick={toggleTheme} color="inherit">

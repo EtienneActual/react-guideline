@@ -27,6 +27,8 @@ interface CandidateForm {
   availability: Dayjs | null;
   preferredSector: string;
   mobilityRadius: number;
+  country: string;
+  city: string;
 }
 
 const candidateSchema = z.object({
@@ -41,6 +43,8 @@ const candidateSchema = z.object({
   mobilityRadius: z.number().min(1, 'Le rayon doit être positif').max(200, 'Le rayon ne peut pas dépasser 200km'),
   experience: z.string().min(1, "L'expérience est requise"),
   availability: z.custom<Dayjs>((val: Dayjs) => val instanceof dayjs, 'La date est requise'),
+  country: z.string().min(1, 'Le pays est requis'),
+  city: z.string().min(1, 'La ville est requise'),
 });
 
 // Simulation d'un appel API
@@ -66,6 +70,8 @@ const sectors = [
   'Agriculture',
 ];
 
+const countries = ['France', 'Belgique', 'Suisse', 'Luxembourg'];
+
 const FormDemo = () => {
   const form = useForm<CandidateForm>({
     defaultValues: {
@@ -77,6 +83,8 @@ const FormDemo = () => {
       availability: null,
       preferredSector: '',
       mobilityRadius: 0,
+      country: '',
+      city: '',
     },
     onSubmit: async ({ value }) => {
       await mutation.mutateAsync(value);
@@ -216,6 +224,52 @@ const FormDemo = () => {
               />
             )}
           </form.Field>
+
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+            <form.Field
+              name="country"
+              listeners={{
+                onChange: () => {
+                  form.setFieldValue('city', '');
+                },
+              }}
+            >
+              {(field) => (
+                <FormControl fullWidth error={field.state.meta.errors.length > 0}>
+                  <InputLabel>Pays</InputLabel>
+                  <Select
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    onBlur={field.handleBlur}
+                    label="Pays"
+                    required
+                  >
+                    {countries.map((country) => (
+                      <MenuItem key={country} value={country}>
+                        {country}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  {field.state.meta.errors.length > 0 && <FormHelperText>{field.state.meta.errors[0]}</FormHelperText>}
+                </FormControl>
+              )}
+            </form.Field>
+
+            <form.Field name="city">
+              {(field) => (
+                <TextField
+                  label="Ville"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  error={field.state.meta.errors.length > 0}
+                  helperText={field.state.meta.errors[0]}
+                  required
+                  fullWidth
+                />
+              )}
+            </form.Field>
+          </Box>
 
           <form.Field name="experience">
             {(field) => (

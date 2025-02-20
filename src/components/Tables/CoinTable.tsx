@@ -17,7 +17,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  CircularProgress,
   Box,
   Typography,
 } from '@mui/material';
@@ -75,7 +74,7 @@ const columns = [
 
 export const CoinTable = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const { data: coins, isLoading, error } = useCoins();
+  const { data: coins } = useCoins();
 
   const table = useReactTable({
     data: coins ?? [],
@@ -83,26 +82,10 @@ export const CoinTable = () => {
     state: {
       sorting,
     },
-    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
   });
-
-  if (isLoading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box sx={{ p: 3 }}>
-        <Typography color="error">Error loading data</Typography>
-      </Box>
-    );
-  }
 
   return (
     <TableContainer component={Paper}>

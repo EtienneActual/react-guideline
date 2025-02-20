@@ -44,7 +44,7 @@ const columns = [
     header: 'Price',
     cell: (info) => `$${info.getValue().toLocaleString()}`,
   }),
-  columnHelper.accessor('priceChangePercentage24h', {
+  columnHelper.accessor('priceChangePercentage24hInCurrency', {
     header: '24h %',
     cell: (info) => {
       const value = info.getValue();
@@ -53,7 +53,7 @@ const columns = [
       return <Typography color={color}>{value?.toFixed(2)}%</Typography>;
     },
   }),
-  columnHelper.accessor('priceChangePercentage7d', {
+  columnHelper.accessor('priceChangePercentage7dInCurrency', {
     header: '7d %',
     cell: (info) => {
       const value = info.getValue();

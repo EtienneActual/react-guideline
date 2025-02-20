@@ -35,7 +35,10 @@ Ce projet est une démonstration d'une application React moderne, intégrant les
 - **Vite 6** - Build tool moderne
 - **Material-UI 6.4** - Composants UI
 - **Emotion** - CSS-in-JS
-- **TanStack Suite** - Gestion des formulaires, requêtes, routage, et tables
+- **TanStack Suite** - Comprend plusieurs bibliothèques puissantes :
+  - **TanStack Form** : Gestion des formulaires avec un typage sûr, facilitant la validation et la gestion des données de formulaire.
+  - **TanStack Table** : Permet de créer des tables de données puissantes et flexibles, avec des fonctionnalités avancées comme le tri, le filtrage et la pagination.
+  - **TanStack Router** : Fournit un routage performant et type-safe, simplifiant la navigation dans l'application.
 - **Zustand** - Gestion d'état
 - **Socket.IO** - Communication temps réel
 - **Zod** - Validation de schémas

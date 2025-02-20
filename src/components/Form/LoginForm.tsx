@@ -39,8 +39,9 @@ export const LoginForm = ({ onSuccess }: Props) => {
       }}
     >
       <Stack spacing={2} sx={{ minWidth: 300, p: 2 }}>
-        <form.Field name="email">
-          {(field) => (
+        <form.Field
+          name="email"
+          children={(field) => (
             <TextField
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
@@ -52,10 +53,11 @@ export const LoginForm = ({ onSuccess }: Props) => {
               required
             />
           )}
-        </form.Field>
+        />
 
-        <form.Field name="password">
-          {(field) => (
+        <form.Field
+          name="password"
+          children={(field) => (
             <TextField
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
@@ -68,11 +70,16 @@ export const LoginForm = ({ onSuccess }: Props) => {
               required
             />
           )}
-        </form.Field>
+        />
 
-        <Button type="submit" variant="contained" disabled={form.state.isSubmitting} fullWidth>
-          Se connecter
-        </Button>
+        <form.Subscribe
+          selector={(state) => [state.canSubmit, state.isSubmitting]}
+          children={([canSubmit, isSubmitting]) => (
+            <Button type="submit" variant="contained" disabled={!canSubmit || isSubmitting} fullWidth>
+              Se connecter
+            </Button>
+          )}
+        />
       </Stack>
     </form>
   );

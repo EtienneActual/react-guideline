@@ -73,6 +73,17 @@ const sectors = [
 const countries = ['France', 'Belgique', 'Suisse', 'Luxembourg'];
 
 const FormDemo = () => {
+  const mutation = useMutation({
+    mutationFn: submitCandidate,
+    onSuccess: (data) => {
+      console.log('onSuccess:', data);
+      form.reset();
+    },
+    onError: (error) => {
+      console.error('onError:', error);
+    },
+  });
+
   const form = useForm<CandidateForm>({
     defaultValues: {
       firstName: '',
@@ -91,17 +102,6 @@ const FormDemo = () => {
     },
     validators: {
       onSubmit: candidateSchema,
-    },
-  });
-
-  const mutation = useMutation({
-    mutationFn: submitCandidate,
-    onSuccess: (data) => {
-      console.log('onSuccess:', data);
-      form.reset();
-    },
-    onError: (error) => {
-      console.error('onError:', error);
     },
   });
 
@@ -127,8 +127,9 @@ const FormDemo = () => {
       >
         <Box sx={{ display: 'grid', gap: 3 }}>
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-            <form.Field name="firstName">
-              {(field) => (
+            <form.Field
+              name="firstName"
+              children={(field) => (
                 <TextField
                   label="Prénom"
                   value={field.state.value}
@@ -140,10 +141,11 @@ const FormDemo = () => {
                   fullWidth
                 />
               )}
-            </form.Field>
+            />
 
-            <form.Field name="lastName">
-              {(field) => (
+            <form.Field
+              name="lastName"
+              children={(field) => (
                 <TextField
                   label="Nom"
                   value={field.state.value}
@@ -155,11 +157,12 @@ const FormDemo = () => {
                   fullWidth
                 />
               )}
-            </form.Field>
+            />
           </Box>
 
-          <form.Field name="email">
-            {(field) => (
+          <form.Field
+            name="email"
+            children={(field) => (
               <TextField
                 label="Email"
                 type="email"
@@ -172,10 +175,11 @@ const FormDemo = () => {
                 fullWidth
               />
             )}
-          </form.Field>
+          />
 
-          <form.Field name="phone">
-            {(field) => (
+          <form.Field
+            name="phone"
+            children={(field) => (
               <TextField
                 label="Téléphone"
                 value={field.state.value}
@@ -187,10 +191,11 @@ const FormDemo = () => {
                 fullWidth
               />
             )}
-          </form.Field>
+          />
 
-          <form.Field name="preferredSector">
-            {(field) => (
+          <form.Field
+            name="preferredSector"
+            children={(field) => (
               <FormControl fullWidth error={field.state.meta.errors.length > 0}>
                 <InputLabel>Secteur préféré</InputLabel>
                 <Select
@@ -208,10 +213,11 @@ const FormDemo = () => {
                 {field.state.meta.errors.length > 0 && <FormHelperText>{field.state.meta.errors[0]}</FormHelperText>}
               </FormControl>
             )}
-          </form.Field>
+          />
 
-          <form.Field name="mobilityRadius">
-            {(field) => (
+          <form.Field
+            name="mobilityRadius"
+            children={(field) => (
               <TextField
                 label="Rayon de mobilité (km)"
                 type="number"
@@ -223,7 +229,7 @@ const FormDemo = () => {
                 fullWidth
               />
             )}
-          </form.Field>
+          />
 
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
             <form.Field
@@ -233,8 +239,7 @@ const FormDemo = () => {
                   form.setFieldValue('city', '');
                 },
               }}
-            >
-              {(field) => (
+              children={(field) => (
                 <FormControl fullWidth error={field.state.meta.errors.length > 0}>
                   <InputLabel>Pays</InputLabel>
                   <Select
@@ -253,10 +258,11 @@ const FormDemo = () => {
                   {field.state.meta.errors.length > 0 && <FormHelperText>{field.state.meta.errors[0]}</FormHelperText>}
                 </FormControl>
               )}
-            </form.Field>
+            />
 
-            <form.Field name="city">
-              {(field) => (
+            <form.Field
+              name="city"
+              children={(field) => (
                 <TextField
                   label="Ville"
                   value={field.state.value}
@@ -268,11 +274,12 @@ const FormDemo = () => {
                   fullWidth
                 />
               )}
-            </form.Field>
+            />
           </Box>
 
-          <form.Field name="experience">
-            {(field) => (
+          <form.Field
+            name="experience"
+            children={(field) => (
               <TextField
                 label="Expérience professionnelle"
                 value={field.state.value}
@@ -285,10 +292,11 @@ const FormDemo = () => {
                 fullWidth
               />
             )}
-          </form.Field>
+          />
 
-          <form.Field name="availability">
-            {(field) => (
+          <form.Field
+            name="availability"
+            children={(field) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Disponibilités"
@@ -303,17 +311,16 @@ const FormDemo = () => {
                 />
               </LocalizationProvider>
             )}
-          </form.Field>
+          />
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={mutation.isPending || !form.state.isValid}
-            sx={{ mt: 2 }}
-          >
-            {mutation.isPending ? 'Envoi en cours...' : 'Envoyer ma candidature'}
-          </Button>
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+            children={([canSubmit, isSubmitting]) => (
+              <Button type="submit" variant="contained" color="primary" disabled={!canSubmit} sx={{ mt: 2 }}>
+                {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma candidature'}
+              </Button>
+            )}
+          />
         </Box>
       </form>
     </Box>

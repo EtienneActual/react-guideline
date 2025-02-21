@@ -16,18 +16,14 @@ export const LoginForm = ({ onSuccess }: Props) => {
       password: '',
     },
     onSubmit: async ({ value }) => {
-      // La validation Zod nous assure que email et password sont définis et valides
       setUser({
         email: value.email,
         username: value.email.split('@')[0],
       });
       onSuccess();
     },
-    // On valide le formulaire avant de soumettre les données grace au onSubmit
     validators: {
-      onChange: loginSchema,
       onSubmit: loginSchema,
-      onMount: loginSchema,
     },
   });
 
@@ -50,7 +46,6 @@ export const LoginForm = ({ onSuccess }: Props) => {
               error={field.state.meta.errors.length > 0}
               helperText={field.state.meta.errors?.[0]}
               fullWidth
-              required
             />
           )}
         />
@@ -67,7 +62,6 @@ export const LoginForm = ({ onSuccess }: Props) => {
               error={field.state.meta.errors.length > 0}
               helperText={field.state.meta.errors?.[0]}
               fullWidth
-              required
             />
           )}
         />

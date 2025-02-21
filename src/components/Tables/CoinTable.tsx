@@ -19,6 +19,7 @@ import {
   Paper,
   Box,
   Typography,
+  Skeleton,
 } from '@mui/material';
 
 const columnHelper = createColumnHelper<Coin>();
@@ -118,3 +119,30 @@ export const CoinTable = () => {
     </TableContainer>
   );
 };
+
+export const CoinTableSkeleton = () => (
+  <TableContainer component={Paper}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          {Array.from({ length: 7 }).map((_, index) => (
+            <TableCell key={index}>
+              <Skeleton variant="text" width={100} />
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {Array.from({ length: 15 }).map((_, rowIndex) => (
+          <TableRow key={rowIndex}>
+            {Array.from({ length: 7 }).map((_, cellIndex) => (
+              <TableCell key={cellIndex}>
+                <Skeleton variant="rectangular" height={40} />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);

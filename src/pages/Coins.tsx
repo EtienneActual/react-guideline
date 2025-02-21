@@ -1,5 +1,5 @@
-import { CoinTable } from '@/components/Tables/CoinTable';
 import { AsyncBoundary } from '@/components/Shared/AsyncBoundary';
+import { CoinTable, CoinTableSkeleton } from '@/components/Tables/CoinTable';
 
 const CoinsPage = () => {
   return (
@@ -11,7 +11,7 @@ const CoinsPage = () => {
           className="h-8 w-auto"
         />
       </div>
-      <AsyncBoundary>
+      <AsyncBoundary loadingFallback={<CoinTableSkeleton />}>
         <CoinTable />
       </AsyncBoundary>
     </div>
